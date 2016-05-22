@@ -30,7 +30,7 @@ public class LockOn : MonoBehaviour {
 		} else {
 			if(targetingObjects.Count > 0){
 				for( int i = 0; i < targetingObjects.Count;i++){
-					Destroy(targetingObjects[i],i*Time.deltaTime * 3);
+					Destroy(targetingObjects[i],i*Time.deltaTime * 0.1f);
 				}
 				targetingObjects.Clear();
 			}
