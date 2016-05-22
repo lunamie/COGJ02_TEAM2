@@ -31,6 +31,7 @@ public class LockOn : MonoBehaviour {
 			if(targetingObjects.Count > 0){
 				for( int i = 0; i < targetingObjects.Count;i++){
 					Destroy(targetingObjects[i],i*Time.deltaTime * 0.1f);
+					GameManager.instance.cnt++;
 				}
 				targetingObjects.Clear();
 			}
