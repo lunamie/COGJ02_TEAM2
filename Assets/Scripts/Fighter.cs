@@ -9,7 +9,7 @@ public class Fighter : MonoBehaviour
     public GameObject FighterObject;
     public Quaternion basisRotation;
     private Vector3 direct = new Vector3(0.0f, 0.0f, 0.0f);
-    public float speed = 200.0f;
+    public float speed = 10.0f;
     public float angle;
     public float test = 0.0f;
 
