@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	static private GameManager instance_ = null;
 	public bool gameEnd = false;
 	public int cnt=0;
+	public GameObject effectPrefab;
 	static public GameManager instance
 	{
 		get
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour {
 		if (Application.isPlaying) {
 			DontDestroyOnLoad (gameObject);
 		}
+	}
+	void Start(){
+		effectPrefab = Resources.Load("Detonator-Sounds") as GameObject;
 	}
 
 	public void ToResult(){

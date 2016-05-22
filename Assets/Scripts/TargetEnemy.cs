@@ -16,8 +16,8 @@ public class TargetEnemy : MonoBehaviour {
 		target.Lockon();
 	}
 	void OnDestroy(){
-		if(deadEffectPrefab){
-			var eff = Instantiate(deadEffectPrefab);
+		if(GameManager.instance.effectPrefab){
+			var eff = Instantiate(GameManager.instance.effectPrefab);
 			eff.transform.position = this.transform.position;
 		}
 	}
