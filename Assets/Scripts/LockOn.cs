@@ -25,6 +25,7 @@ public class LockOn : MonoBehaviour {
 			if(!enemy){
 				return;
 			}
+			Audio.instance.PlaySE("LockSE");
 			targetingObjects.Add(enemy);
 			var targetMarker = Object.Instantiate(targetPrefab).GetComponent<UIFollowTarget>();
 			targetMarker.setTarget(enemy.transform);
@@ -33,7 +34,7 @@ public class LockOn : MonoBehaviour {
 		} else {
 			if(targetingObjects.Count > 0){
 				for( int i = 0; i < targetingObjects.Count;i++){
-					Destroy(targetingObjects[i]);
+					Destroy(targetingObjects[i],i*Time.deltaTime * 3);
 				}
 				for( int i = 0; i < targetingMarkers.Count;i++){
 					Destroy(targetingMarkers[i]);

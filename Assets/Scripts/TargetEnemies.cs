@@ -19,10 +19,24 @@ public class TargetEnemies : MonoBehaviour {
 		targets.Add(obj);
 	}
 	public GameObject get(){
-		var ret = targets.FindLast(n=>n);
+		var ret = targets.FindLast(n=>n.GetComponent<Renderer>().isVisible);
 		if(ret){
 			targets.Remove(ret);
 		}
 		return ret;
+	}
+	bool isOutOfScreen(Transform t) {
+		Vector3 positionInScreen = Camera.main.WorldToViewportPoint(transform.position);
+		positionInScreen.z = transform.position.z;
+
+		if (positionInScreen.x <= 0 ||
+			positionInScreen.x >= 1 ||
+			positionInScreen.y <= 0 ||
+			positionInScreen.y >= 1)
+		{
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
