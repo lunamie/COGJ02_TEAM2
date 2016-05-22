@@ -19,7 +19,7 @@ public class TargetEnemies : MonoBehaviour {
 		targets.Add(obj);
 	}
 	public GameObject get(){
-		var ret = targets.FindLast(n=>n.GetComponent<Renderer>().isVisible);
+		var ret = targets.FindLast(n=>n.gameObject.GetComponent<Renderer>().isVisible);
 		if(ret){
 			targets.Remove(ret);
 		}
