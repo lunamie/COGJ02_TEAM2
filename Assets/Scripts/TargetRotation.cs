@@ -13,6 +13,7 @@ public class TargetRotation : MonoBehaviour {
 	private Vector3 slidePos;//元の位置からtargetPosをずらす
 	private Vector3 deltaPos;//targetPosからの距離
 	private Vector3 rotatePos;//deltaPosから初期角度計算
+	private float r;
 	public float xUpperLimit;
 	public float xLowerLimit;
 	public float yUpperLimit;
@@ -24,7 +25,12 @@ public class TargetRotation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//targetに、"Point"の名前のオブジェクトのコンポーネントを見つけてアクセスする
-		Transform target = GameObject.Find("Point").transform;
+//		int setPoint = Random.Range(1, 4);
+		Transform target = transform.parent;
+//		if(setPoint==1)target = GameObject.Find("Point").transform;
+//		else if(setPoint==2)target = GameObject.Find("Point2").transform;
+//		else if(setPoint==3)target = GameObject.Find("Point3").transform;
+//		else target = GameObject.Find("Point4").transform;
 		//変数targetPosにPointの位置情報を取得
 		targetPos = target.position;
 
@@ -33,7 +39,7 @@ public class TargetRotation : MonoBehaviour {
 			Random.Range(zLowerLimit,zUpperLimit));
 		targetPos = targetPos + slidePos;
 		deltaPos = transform.position - targetPos;
-		float r = Mathf.Sqrt(deltaPos.z*deltaPos.z + deltaPos.x*deltaPos.x);
+		r = Mathf.Sqrt(deltaPos.z*deltaPos.z + deltaPos.x*deltaPos.x);
 		float rotatetheta = Mathf.Atan2(deltaPos.x,deltaPos.z);//ラジアン(pi)
 //		Debug.Log("theta = "+(rotatetheta));
 //		Debug.Log("eul = "+(360/2*Mathf.PI)*(rotatetheta));
@@ -63,13 +69,14 @@ public class TargetRotation : MonoBehaviour {
 
 		//	Pointを中心に自分を現在の上方向に、毎秒angle分だけ回転する。
 		Vector3 axis = transform.TransformDirection(Vector3.up);
-		transform.RotateAround(targetPos, axis ,angle * Time.deltaTime);
+		transform.RotateAround(targetPos, axis ,angle/(r) * Time.deltaTime);
 
 	}
 
 	void OnCollisionEnter(Collision other) {
 
 		Destroy(gameObject);
+		Debug.Log ("hit!");
 
 	}
 }

@@ -15,7 +15,7 @@ public class BOSSScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		enemycount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+		enemycount = this.transform.childCount;
 		if (enemycount < enemyNumber) {
 			// プレハブからインスタンスを生成
 			float rangex = Random.Range(500f, 1000f);
@@ -36,7 +36,8 @@ public class BOSSScript : MonoBehaviour {
 //			Debug.Log ("rangez = "+rangez);
 
 //			Instantiate (prefab, new Vector3(0, -100, rangez), Quaternion.identity);
-			Instantiate (prefab, new Vector3(0, 500, rangez), new Quaternion(0,1,0, rot));
+			GameObject obj = (GameObject)Instantiate (prefab, new Vector3(0, 500, rangez), new Quaternion(0,1,0, rot));
+			obj.transform.parent = transform;
 		}
 	
 	}
