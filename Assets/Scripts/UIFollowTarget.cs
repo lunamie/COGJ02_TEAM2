@@ -5,7 +5,10 @@ using UnityEngine.UI;
 public class UIFollowTarget : MonoBehaviour 
 {
 	RectTransform rectTransform = null;
-	[SerializeField] Transform target = null;
+	[SerializeField]
+	Transform target = null;
+	[SerializeField]
+	Animator lockonAnimation;
 	public void setTarget(Transform t){
 		this.target = t;
 	}
@@ -14,11 +17,21 @@ public class UIFollowTarget : MonoBehaviour
 		rectTransform = GetComponent<RectTransform> ();
 	}
 	void Start(){
-		rectTransform.position = RectTransformUtility.WorldToScreenPoint (Camera.main, target.position);
+		if(target){
+			rectTransform.position = RectTransformUtility.WorldToScreenPoint (Camera.main, target.position);
+		}
 	}
-
+	public void Lockon(){
+		if(lockonAnimation){
+			lockonAnimation.SetTrigger("Lockon");
+		}
+	}
 	void Update()
 	{
-		rectTransform.position = RectTransformUtility.WorldToScreenPoint (Camera.main, target.position);
+		if(!target){
+			Destroy(gameObject);
+		}else{
+			rectTransform.position = RectTransformUtility.WorldToScreenPoint (Camera.main, target.position);
+		}
 	}
 }

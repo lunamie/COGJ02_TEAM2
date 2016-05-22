@@ -12,9 +12,8 @@ public class LockOn : MonoBehaviour {
 	[SerializeField]
 	List<GameObject> targetingObjects = new List<GameObject>();
 
-	[SerializeField]
-	List<GameObject> targetingMarkers = new List<GameObject>();
 	Leap.Controller controller;
+
 	void Start(){
 		controller = new Leap.Controller();
 	}
@@ -25,22 +24,15 @@ public class LockOn : MonoBehaviour {
 			if(!enemy){
 				return;
 			}
+			enemy.GetComponent<TargetEnemy>().FireLockon();
 			Audio.instance.PlaySE("LockSE");
 			targetingObjects.Add(enemy);
-			var targetMarker = Object.Instantiate(targetPrefab).GetComponent<UIFollowTarget>();
-			targetMarker.setTarget(enemy.transform);
-			targetMarker.transform.SetParent(  targetCanvas.transform);
-			targetingMarkers.Add(targetMarker.gameObject);
 		} else {
 			if(targetingObjects.Count > 0){
 				for( int i = 0; i < targetingObjects.Count;i++){
 					Destroy(targetingObjects[i],i*Time.deltaTime * 3);
 				}
-				for( int i = 0; i < targetingMarkers.Count;i++){
-					Destroy(targetingMarkers[i]);
-				}
 				targetingObjects.Clear();
-				targetingMarkers.Clear();
 			}
 		}
 			
