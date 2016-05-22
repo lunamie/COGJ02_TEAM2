@@ -19,7 +19,7 @@ public class TargetEnemies : MonoBehaviour {
 		targets.Add(obj);
 	}
 	public GameObject get(){
-		var ret = targets.FindLast(n=>n.gameObject.GetComponent<Renderer>().isVisible);
+		var ret = targets.FindLast(n=>!this.isOutOfScreen(n.transform));
 		if(ret){
 			targets.Remove(ret);
 		}
