@@ -1,0 +1,1 @@
+﻿using UnityEngine;using System.Collections;public class TargetEnemy : MonoBehaviour {	void Start(){		TargetEnemies.insntace.Add(gameObject);	}}
